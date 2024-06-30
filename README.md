@@ -7,6 +7,7 @@ Equipe:
 | Estudante | Matrícula | 
 |-------------|-------------|
 | Eduardo Maia Rezende  | 180119231 |
+| José Luís Ramos Teixeira | 190057858 |
 | Pedro Vitor Augusto de Jesus | 200073249 |
 
 
