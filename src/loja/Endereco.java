@@ -44,5 +44,13 @@ public class Endereco {
         } else {
             return 0.00;
         }
-    };
+    }
+
+    public String getRegiao() {
+        return this.regiao;
+    }
+
+    public boolean isCapital() {
+        return this.capital;
+    }
 }
