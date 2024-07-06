@@ -32,8 +32,8 @@ public class Venda {
         this.frete = cliente.endereco.getFrete();
         this.numeroCartao = numeroCartao;
     }
-    
-    public double calcularTotal(metodoPagamento pagamento, String numeroCartao) {
+
+    public double calcularTotalSemTaxa(metodoPagamento pagamento) {
         double total = 0.0;
         for (ItemVenda item : produtos) {
             total += item.getProduto().getValorVenda() * item.getQuantidade();
@@ -41,7 +41,24 @@ public class Venda {
         total += calculaFrete();
         total -= (total * cliente.getDesconto());
 
-        total += calculaTaxa(total);
+        return total;
+    }
+
+    public double calcularTotalSemTaxa(metodoPagamento pagamento, String numeroCartao) {
+        double total = 0.0;
+        for (ItemVenda item : produtos) {
+            total += item.getProduto().getValorVenda() * item.getQuantidade();
+        }
+        total += calculaFrete();
+        total -= (total * cliente.getDesconto());
+
+        return total;
+
+    }
+    
+    public double calcularTotal(metodoPagamento pagamento, String numeroCartao) {
+        
+        double total = this.calcularTotalSemTaxa(pagamento, numeroCartao);
 
         this.cliente.atualizaSaldoCashback(calculaCashback(total, isCartaoLoja(numeroCartao)));
         this.cliente.atualizaTotalComprasMes(total);
@@ -50,14 +67,10 @@ public class Venda {
 
     }
 
+
     public double calcularTotal(metodoPagamento pagamento) {
-        double total = 0.0;
-        for (ItemVenda item : produtos) {
-            total += item.getProduto().getValorVenda() * item.getQuantidade();
-        }
-        
-        total += calculaFrete();
-        total -= (total * cliente.getDesconto());
+
+        double total = this.calcularTotalSemTaxa(pagamento, numeroCartao);
 
         total += calculaTaxa(total);
 

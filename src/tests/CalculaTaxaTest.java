@@ -23,21 +23,21 @@ public class CalculaTaxaTest {
         @Parameters
         public static Collection<Object[]> data() {
             Object[][] resposta = new Object[][] {
-                { 100, new Cliente ( "João", new Endereco ("Distrito Federal", true)), 23.0 },
-                { 100, new Cliente ( "João", new Endereco ("Regiao Centro-oeste", false)),29.0 },
-                { 100, new Cliente ( "João", new Endereco ("Regiao Centro-oeste", true)), 26.0},
-                { 100, new Cliente ( "João", new Endereco ("Regiao Nordeste", false)),  34.0},
-                { 100, new Cliente ( "João", new Endereco ("Regiao Nordeste", true)),  31.0},
-                { 100, new Cliente ( "João", new Endereco ("Regiao Norte", false)),   41.0 },
-                { 100, new Cliente ( "João", new Endereco ("Regiao Norte", true)),    36.0},
-                { 100, new Cliente ( "João", new Endereco ("Regiao Sudeste", false)), 26.0  },
-                { 100, new Cliente ( "João", new Endereco ("Regiao Sudeste", true)),  23.0 },
-                { 100, new Cliente ( "João", new Endereco ("Regiao Sul", false)),   29.0  },
-                { 100, new Cliente ( "João", new Endereco ("Regiao Sul", true)),    26.0 }
+                { 100, new Cliente ( "João", new Endereco ("Distrito Federal", true)), 18.9},
+                { 100, new Cliente ( "João", new Endereco ("Centro Oeste", false)), 18.08},
+                { 100, new Cliente ( "João", new Endereco ("Centro Oeste", true)), 17.6},
+                { 100, new Cliente ( "João", new Endereco ("Nordeste", false)),  18.88},
+                { 100, new Cliente ( "João", new Endereco ("Nordeste", true)),  18.4},
+                { 100, new Cliente ( "João", new Endereco ("Norte", false)),   20.0 },
+                { 100, new Cliente ( "João", new Endereco ("Norte", true)),    19.2},
+                { 100, new Cliente ( "João", new Endereco ("Sudeste", false)), 17.6 }, 
+                { 100, new Cliente ( "João", new Endereco ("Sudeste", true)),  17.12},
+                { 100, new Cliente ( "João", new Endereco ("Sul", false)),   18.08},
+                { 100, new Cliente ( "João", new Endereco ("Sul", true)),    17.6}
             };
             return Arrays.asList(resposta);
         }
-        public void TesteCalculaTaxa(double valor, Cliente cliente, double taxaEsperada) {
+        public CalculaTaxaTest(double valor, Cliente cliente, double taxaEsperada) {
             this.valor = valor;
             this.cliente = cliente;
             this.taxaEsperada = taxaEsperada;
@@ -51,8 +51,8 @@ public class CalculaTaxaTest {
         ItemVenda[] itens = {item1};
 
         Venda venda = new Venda(itens, this.cliente, Venda.metodoPagamento.dinheiro, new Date());
-
-        double taxa = venda.calculaTaxa(this.valor);
+        double valor = venda.calcularTotalSemTaxa(Venda.metodoPagamento.dinheiro);
+        double taxa = venda.calculaTaxa(valor);
         assertEquals(taxaEsperada, taxa, 0.1);
     }
 
