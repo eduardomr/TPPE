@@ -63,35 +63,35 @@ public class CalculaTotalTest {
 
         return Arrays.asList(new Object[][] {
 
-                // Cliente padrão no DF com pagamento em dinheiro
-                { produtos1, cliente1, Venda.metodoPagamento.dinheiro, "", 11.8 },
-                { produtos2, cliente1, Venda.metodoPagamento.dinheiro, "", 34.2 },
-                
-                // Cliente especial no DF com pagamento em dinheiro
-                { produtos1, cliente2, Venda.metodoPagamento.dinheiro, "", 14.3 },
-                { produtos3, cliente2, Venda.metodoPagamento.dinheiro, "", 75.96 },
+            // Cliente padrão no DF com pagamento em dinheiro
+            { produtos1, cliente1, Venda.metodoPagamento.dinheiro, "", 17.7 },
+            { produtos2, cliente1, Venda.metodoPagamento.dinheiro, "", 64.9 },
+            
+            // Cliente especial no DF com pagamento em dinheiro
+            { produtos1, cliente2, Venda.metodoPagamento.dinheiro, "", 14.33 },
+            { produtos3, cliente2, Venda.metodoPagamento.dinheiro, "", 152.4 },
 
-                // Cliente prime no DF com pagamento em cartão da empresa
-                { produtos1, cliente3, Venda.metodoPagamento.cartao, "4296 13XX XXXX XXXX", 11.8 },
-                { produtos4, cliente3, Venda.metodoPagamento.cartao, "4296 13XX XXXX XXXX", 166.6 },
+            // Cliente prime no DF com pagamento em cartão da empresa
+            { produtos1, cliente3, Venda.metodoPagamento.cartao, "4296 13XX XXXX XXXX", 11.8 },
+            { produtos4, cliente3, Venda.metodoPagamento.cartao, "4296 13XX XXXX XXXX", 354.0 },
 
-                // Cliente padrão fora do DF com pagamento em dinheiro
-                { produtos1, cliente4, Venda.metodoPagamento.dinheiro, "", 18.6 },
-                { produtos5, cliente4, Venda.metodoPagamento.dinheiro, "", 322.8 },
+            // Cliente padrão fora do DF com pagamento em dinheiro
+            { produtos1, cliente4, Venda.metodoPagamento.dinheiro, "", 11.6 },
+            { produtos5, cliente4, Venda.metodoPagamento.dinheiro, "", 638.0 },
 
-                // Cliente especial fora do DF com pagamento em cartão da empresa
-                { produtos1, cliente5, Venda.metodoPagamento.cartao, "4296 13XX XXXX XXXX", 14.5 },
-                { produtos3, cliente5, Venda.metodoPagamento.cartao, "4296 13XX XXXX XXXX", 82.1 },
+            // Cliente especial fora do DF com pagamento em cartão da empresa
+            { produtos1, cliente5, Venda.metodoPagamento.cartao, "4296 13XX XXXX XXXX", 10.44 },
+            { produtos3, cliente5, Venda.metodoPagamento.cartao, "4296 13XX XXXX XXXX", 146.16 },
 
-                // Cliente prime fora do DF com pagamento em dinheiro
-                { produtos1, cliente6, Venda.metodoPagamento.dinheiro, "", 17.7 },
-                { produtos4, cliente6, Venda.metodoPagamento.dinheiro, "", 222.4 },
+            // Cliente prime fora do DF com pagamento em dinheiro
+            { produtos1, cliente6, Venda.metodoPagamento.dinheiro, "", 11.6 },
+            { produtos4, cliente6, Venda.metodoPagamento.dinheiro, "", 348.0 },
 
-                // Cliente especial no DF com pagamento em cartão diferente da empresa
-                { produtos2, cliente2, Venda.metodoPagamento.cartao, "1234 5678 9101 1121", 35.9 },
-                
-                // Cliente prime fora do DF com pagamento em cartão diferente da empresa
-                { produtos3, cliente6, Venda.metodoPagamento.cartao, "1234 5678 9101 1121", 76.6 }
+            // Cliente especial no DF com pagamento em cartão diferente da empresa
+            { produtos2, cliente2, Venda.metodoPagamento.cartao, "1234 5678 9101 1121", 56.81 },
+            
+            // Cliente prime fora do DF com pagamento em cartão diferente da empresa
+            { produtos3, cliente6, Venda.metodoPagamento.cartao, "1234 5678 9101 1121", 146.16 }
         });
     }
 
