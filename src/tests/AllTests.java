@@ -9,7 +9,9 @@ import org.junit.runners.Suite.SuiteClasses;
     CalculaTotalTest.class,
     CalculaFreteTest.class,
     CalculaTaxaTest.class,
-    CalculaCashbackTest.class
+    CalculaCashbackTest.class,
+    ClienteTest.class,
+    EnderecoTest.class
 })
 public class AllTests {
 }
