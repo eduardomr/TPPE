@@ -16,13 +16,17 @@ public class CalculaCashbackTest extends TestCase {
     private ItemVenda[] produtos;
     private Cliente cliente;
     private Venda.metodoPagamento pagamento;
+    private String numeroCartao = "";
     private double cashbackEsperado;
 
-    public CalculaCashbackTest(ItemVenda[] produtos, Cliente cliente, Venda.metodoPagamento pagamento, double cashbackEsperado) {
+
+    public CalculaCashbackTest(ItemVenda[] produtos, Cliente cliente, Venda.metodoPagamento pagamento,String numeroCartao, double cashbackEsperado) {
         this.produtos = produtos;
         this.cliente = cliente;
         this.pagamento = pagamento;
+        this.numeroCartao = numeroCartao;
         this.cashbackEsperado = cashbackEsperado;
+
     }
 
     @Parameters
@@ -43,28 +47,28 @@ public class CalculaCashbackTest extends TestCase {
 
         return Arrays.asList(new Object[][] {
             // Cliente prime com pagamento em cartão da empresa
-            { produtos1, clientePrime, Venda.metodoPagamento.cartao, 0.05 * 10.0 },
-            { produtos2, clientePrime, Venda.metodoPagamento.cartao, 0.05 * (10.0 + 2 * 20.0) },
+            { produtos1, clientePrime, Venda.metodoPagamento.cartao,"4296 13XX XXXX XXXX", 0.05 * 10.0 },
+            { produtos2, clientePrime, Venda.metodoPagamento.cartao, "4296 13XX XXXX XXXX", 0.05 * (10.0 + 2 * 20.0) },
 
             // Cliente prime com pagamento em dinheiro
-            { produtos1, clientePrime, Venda.metodoPagamento.dinheiro, 0.03 * 10.0 },
-            { produtos2, clientePrime, Venda.metodoPagamento.dinheiro, 0.03 * (10.0 + 2 * 20.0) },
+            { produtos1, clientePrime, Venda.metodoPagamento.dinheiro,"", 0.03 * 10.0 },
+            { produtos2, clientePrime, Venda.metodoPagamento.dinheiro,"", 0.03 * (10.0 + 2 * 20.0) },
+            
 
             // Cliente (não prime) com pagamento em cartão da empresa
-            { produtos1, clienteNaoPrime, Venda.metodoPagamento.cartao, 0.0 },
-            { produtos2, clienteNaoPrime, Venda.metodoPagamento.cartao, 0.0 },
+            { produtos1, clienteNaoPrime, Venda.metodoPagamento.cartao,"4296 13XX XXXX XXXX", 0.0 },
+            { produtos2, clienteNaoPrime, Venda.metodoPagamento.cartao,"4296 13XX XXXX XXXX", 0.0 },
 
             // Cliente (não prime) com pagamento em dinheiro
-            { produtos1, clienteNaoPrime, Venda.metodoPagamento.dinheiro, 0.0 },
-            { produtos2, clienteNaoPrime, Venda.metodoPagamento.dinheiro, 0.0 }
+            { produtos1, clienteNaoPrime, Venda.metodoPagamento.dinheiro,"", 0.0 },
+            { produtos2, clienteNaoPrime, Venda.metodoPagamento.dinheiro,"", 0.0 }
         });
     }
 
     @Test
     public void testCalculaCashback() {
-        Venda venda = new Venda(produtos, cliente, pagamento, new Date());
-        double total = venda.calcularTotal(pagamento, pagamento == Venda.metodoPagamento.cartao ? "4296 13XX XXXX XXXX" : "");
-        boolean isCartaoEmpresa = pagamento == Venda.metodoPagamento.cartao;
-        assertEquals(cashbackEsperado, venda.calculaCashback(total, isCartaoEmpresa), 0.01);
-    }
+        Venda venda = new Venda(produtos, cliente, pagamento, new Date(), numeroCartao);
+        double total = venda.calcularTotalSemTaxa(pagamento);
+        assertEquals(cashbackEsperado, venda.calculaCashback(total, venda.isCartaoLoja(numeroCartao)));
+        }
 }

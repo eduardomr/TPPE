@@ -35,7 +35,7 @@ public class Venda {
 
     public double calcularTotalSemTaxa(metodoPagamento pagamento) {
         double total = 0.0;
-        for (ItemVenda item : produtos) {
+        for (ItemVenda item : this.produtos) {
             total += item.getProduto().getValorVenda() * item.getQuantidade();
         }
         total += calculaFrete();
@@ -44,21 +44,10 @@ public class Venda {
         return total;
     }
 
-    public double calcularTotalSemTaxa(metodoPagamento pagamento, String numeroCartao) {
-        double total = 0.0;
-        for (ItemVenda item : produtos) {
-            total += item.getProduto().getValorVenda() * item.getQuantidade();
-        }
-        total += calculaFrete();
-        total -= (total * cliente.getDesconto());
-
-        return total;
-
-    }
     
     public double calcularTotal(metodoPagamento pagamento, String numeroCartao) {
         
-        double total = this.calcularTotalSemTaxa(pagamento, numeroCartao);
+        double total = this.calcularTotalSemTaxa(pagamento);
 
         this.cliente.atualizaSaldoCashback(calculaCashback(total, isCartaoLoja(numeroCartao)));
         this.cliente.atualizaTotalComprasMes(total);
@@ -70,7 +59,7 @@ public class Venda {
 
     public double calcularTotal(metodoPagamento pagamento) {
 
-        double total = this.calcularTotalSemTaxa(pagamento, numeroCartao);
+        double total = this.calcularTotalSemTaxa(pagamento);
 
         total += calculaTaxa(total);
 
@@ -110,13 +99,12 @@ public class Venda {
     }
 
     public double calculaCashback(double total, boolean cartaoLoja) {
-        if (cliente.getTipo() == Cliente.tipoCliente.PRIME) {
-            if (cartaoLoja) {
-                return total * 0.05;
-            } else {
-                return total * 0.03;
+            if(this.cliente.tipo != Cliente.tipoCliente.PRIME){
+                return 0.0;
             }
-        }
-        return 0.0;
+            if(cartaoLoja){
+                return 0.05 * total;
+            }
+            return 0.03 * total;
     }
-};
+}
