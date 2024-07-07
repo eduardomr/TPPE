@@ -39,7 +39,6 @@ public class Venda {
             total += item.getProduto().getValorVenda() * item.getQuantidade();
         }
         total += calculaFrete();
-        total -= (total * cliente.getDesconto());
 
         return total;
     }
@@ -49,11 +48,24 @@ public class Venda {
         
         double total = this.calcularTotalSemTaxa(pagamento);
 
+        if (cliente.getTipo() == Cliente.tipoCliente.PRIME) {
+            if (isCartaoLoja(numeroCartao)) {
+                total -= total * 0.05;  
+            } else {
+                total -= total * 0.03;  
+            }
+        } else {
+            if (isCartaoLoja(numeroCartao)) {
+                total -= total * 0.1;  
+            }
+        }
+
+        total += calculaTaxa(total);
+
         this.cliente.atualizaSaldoCashback(calculaCashback(total, isCartaoLoja(numeroCartao)));
         this.cliente.atualizaTotalComprasMes(total);
 
-        return total;
-
+        return total - (total * cliente.getDesconto());
     }
 
 
