@@ -1,19 +1,19 @@
 package loja;
 
 public class Cliente {
-    int id;
-    String nome;
-    public enum tipoCliente {PADRAO, ESPECIAL, PRIME};
-    tipoCliente tipo;
-    Endereco endereco;
-    double saldoCashback;
-    double totalComprasMensal;
+    private int id;
+    private String nome;
+    public enum TipoCliente {PADRAO, ESPECIAL, PRIME};
+    private TipoCliente tipo;
+    private Endereco endereco;
+    private double saldoCashback;
+    private double totalComprasMensal;
 
     public Cliente(String nome, Endereco endereco) {
-        this(nome, endereco, tipoCliente.PADRAO);
+        this(nome, endereco, TipoCliente.PADRAO);
     }
 
-    public Cliente(String nome, Endereco endereco, tipoCliente tipo) {
+    public Cliente(String nome, Endereco endereco, TipoCliente tipo) {
         this.nome = nome;
         this.endereco = endereco;
         this.saldoCashback = 0;
@@ -21,10 +21,8 @@ public class Cliente {
         this.tipo = tipo;
     }
 
-   public double getDesconto(){
+    public double getDesconto() {
         switch (this.tipo) {
-            case PADRAO:
-                return 0.0;
             case ESPECIAL:
                 return 0.1;
             case PRIME:
@@ -32,37 +30,35 @@ public class Cliente {
             default:
                 return 0.0;
         }
-    };
+    }
 
-    public tipoCliente getTipo() {
+    public TipoCliente getTipo() {
         return this.tipo;
-    };
+    }
 
-    public double getDescontoFrete(){
+    public double getDescontoFrete() {
         switch (this.tipo) {
-            case PADRAO:
-                return 0.0;
             case ESPECIAL:
                 return 0.3;
             case PRIME:
-                return 1;
+                return 1.0;
             default:
                 return 0.0;
         }
-    };
+    }
 
-    public void atualizaTotalComprasMes(double valorComprado ){
-        this.totalComprasMensal = this.totalComprasMensal + valorComprado;
-        if (this.totalComprasMensal > 100){
-            this.tipo = tipoCliente.ESPECIAL;
+    public void atualizaTotalComprasMes(double valorComprado) {
+        this.totalComprasMensal += valorComprado;
+        if (this.totalComprasMensal > 100) {
+            this.tipo = TipoCliente.ESPECIAL;
         }
-    };
+    }
 
-    public void atualizaSaldoCashback(double saldoCashback){
-        this.saldoCashback = this.saldoCashback + saldoCashback;
-    };
+    public void atualizaSaldoCashback(double saldoCashback) {
+        this.saldoCashback += saldoCashback;
+    }
 
+    public Endereco getEndereco() {
+        return this.endereco;
+    }
 }
-
-
-

@@ -42,8 +42,8 @@ public class CalculaCashbackTest extends TestCase {
 
         Endereco endereco = new Endereco("Distrito Federal", true);
 
-        Cliente clientePrime = new Cliente("José", endereco, Cliente.tipoCliente.PRIME);
-        Cliente clienteNaoPrime = new Cliente("Carlos", endereco, Cliente.tipoCliente.ESPECIAL);
+        Cliente clientePrime = new Cliente("José", endereco, Cliente.TipoCliente.PRIME);
+        Cliente clienteNaoPrime = new Cliente("Carlos", endereco, Cliente.TipoCliente.ESPECIAL);
 
         return Arrays.asList(new Object[][] {
             // Cliente prime com pagamento em cartão da empresa

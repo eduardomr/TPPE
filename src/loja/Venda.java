@@ -20,7 +20,7 @@ class CalculadoraTotal {
     public double calcularTotal() {
         double total = venda.calcularTotalSemTaxa(venda.pagamento);
 
-        if (venda.cliente.getTipo() == Cliente.tipoCliente.PRIME) {
+        if (venda.cliente.getTipo() == Cliente.TipoCliente.PRIME) {
             if (isCartaoLoja) {
                 total -= total * 0.05;  
             } else {
@@ -64,7 +64,7 @@ public class Venda {
         this.cliente = cliente;
         this.pagamento = pagamento;
         this.data = data;
-        this.frete = cliente.endereco.getFrete();
+        this.frete = cliente.getEndereco().getFrete();
     }
 
     public Venda(ItemVenda[] produtos, Cliente cliente, metodoPagamento pagamento, Date data, String numeroCartao) {
@@ -72,7 +72,7 @@ public class Venda {
         this.cliente = cliente;
         this.pagamento = pagamento;
         this.data = data;
-        this.frete = cliente.endereco.getFrete();
+        this.frete = cliente.getEndereco().getFrete();
         this.numeroCartao = numeroCartao;
     }
 
@@ -98,7 +98,7 @@ public class Venda {
         double taxaICMS = 0.0;
         double taxaMunicipal = 0.0;
 
-        if (cliente.endereco.getRegiao().equals("Distrito Federal")) {
+        if (cliente.getEndereco().getRegiao().equals("Distrito Federal")) {
             taxaICMS = 0.18;
         } else {
             taxaICMS = 0.12;
@@ -111,7 +111,7 @@ public class Venda {
     }
 
     public double calculaFrete() {
-        return this.cliente.endereco.getFrete() - this.cliente.getDescontoFrete() * this.cliente.endereco.getFrete();
+        return this.cliente.getEndereco().getFrete() - this.cliente.getDescontoFrete() * this.cliente.getEndereco().getFrete();
     }
 
     public boolean isCartaoLoja(String numeroCartao) {
@@ -119,7 +119,7 @@ public class Venda {
     }
 
     public double calculaCashback(double total, boolean cartaoLoja) {
-        if (this.cliente.tipo != Cliente.tipoCliente.PRIME) {
+        if (this.cliente.getTipo() != Cliente.TipoCliente.PRIME) {
             return 0.0;
         }
         if (cartaoLoja) {

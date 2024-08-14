@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import loja.Cliente;
 import loja.Endereco;
-import loja.Cliente.tipoCliente;
+import loja.Cliente.TipoCliente;
 
 
 //Testes Parametrizados
@@ -17,11 +17,11 @@ import loja.Cliente.tipoCliente;
 public class ClienteTest extends TestCase {
     private String nome;
     private Endereco endereco;
-    private tipoCliente tipo;
+    private TipoCliente tipo;
     private double descontoEsperado;
     private double descontoFreteEsperado;
 
-    public ClienteTest(String nome, Endereco endereco, tipoCliente tipo, double descontoEsperado, double descontoFreteEsperado){
+    public ClienteTest(String nome, Endereco endereco, TipoCliente tipo, double descontoEsperado, double descontoFreteEsperado){
         this.nome = nome;
         this.endereco = endereco;
         this.tipo = tipo;
@@ -33,9 +33,9 @@ public class ClienteTest extends TestCase {
     public static Collection<Object[]> data(){
         Endereco endereco = new Endereco("Distrito Federal", true);
         return Arrays.asList(new Object[][]{
-            {"João", endereco, tipoCliente.PADRAO, 0.0, 0.0},
-            {"Maria", endereco, tipoCliente.ESPECIAL, 0.1, 0.3},
-            {"José", endereco, tipoCliente.PRIME, 0.0, 1.0}
+            {"João", endereco, TipoCliente.PADRAO, 0.0, 0.0},
+            {"Maria", endereco, TipoCliente.ESPECIAL, 0.1, 0.3},
+            {"José", endereco, TipoCliente.PRIME, 0.0, 1.0}
         });
     }
 

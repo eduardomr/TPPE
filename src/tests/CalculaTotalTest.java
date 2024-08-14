@@ -39,9 +39,9 @@ public class CalculaTotalTest {
 
         Endereco endereco = new Endereco("Distrito Federal", true);
 
-        Cliente clientePadrao = new Cliente("Ana", endereco, Cliente.tipoCliente.PADRAO);
-        Cliente clienteEspecial = new Cliente("Carlos", endereco, Cliente.tipoCliente.ESPECIAL);
-        Cliente clientePrime = new Cliente("José", endereco, Cliente.tipoCliente.PRIME);
+        Cliente clientePadrao = new Cliente("Ana", endereco, Cliente.TipoCliente.PADRAO);
+        Cliente clienteEspecial = new Cliente("Carlos", endereco, Cliente.TipoCliente.ESPECIAL);
+        Cliente clientePrime = new Cliente("José", endereco, Cliente.TipoCliente.PRIME);
 
         return Arrays.asList(new Object[][] {
             // Cliente (padrão / especial / prime) com pagamento em cartão SENDO da empresa

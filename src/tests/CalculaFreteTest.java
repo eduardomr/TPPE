@@ -18,7 +18,7 @@ public class CalculaFreteTest{
     private Venda venda;
     private double freteFinal;
 
-    public CalculaFreteTest(Cliente.tipoCliente tipo, double freteFinal) {
+    public CalculaFreteTest(Cliente.TipoCliente tipo, double freteFinal) {
     
         Cliente cliente = new Cliente("João", new Endereco("Distrito Federal", true), tipo);
         Produto produto1 = new Produto("Produto 1", 1, "Descricao 1", 10.0, "unidade");
@@ -40,9 +40,9 @@ public class CalculaFreteTest{
     @Parameters
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][] {
-            { Cliente.tipoCliente.ESPECIAL, 3.5 },
-            { Cliente.tipoCliente.PRIME, 0.0 },
-            { Cliente.tipoCliente.PADRAO, 5.0 }
+            { Cliente.TipoCliente.ESPECIAL, 3.5 },
+            { Cliente.TipoCliente.PRIME, 0.0 },
+            { Cliente.TipoCliente.PADRAO, 5.0 }
 
         });
 
