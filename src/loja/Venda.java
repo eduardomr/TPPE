@@ -2,47 +2,8 @@ package loja;
 
 import java.util.Date;
 
-// Classe que encapsula o cálculo do total da venda
-/* Esta classe encapsula a lógica específica para o cálculo 
-do total da venda, tornando o código mais modular e 
-facilitando a manutenção. */
-class CalculadoraTotal {
-    private Venda venda;
-    private String numeroCartao;
-    private boolean isCartaoLoja;
+import loja.Cliente.TipoCliente;
 
-    public CalculadoraTotal(Venda venda, String numeroCartao) {
-        this.venda = venda;
-        this.numeroCartao = numeroCartao;
-        this.isCartaoLoja = venda.isCartaoLoja(numeroCartao);
-    }
-
-    public double calcularTotal() {
-        double total = venda.calcularTotalSemTaxa(venda.pagamento);
-
-        if (venda.cliente.getTipo() == Cliente.TipoCliente.PRIME) {
-            if (isCartaoLoja) {
-                total -= total * 0.05;  
-            } else {
-                total -= total * 0.03;  
-            }
-        } else {
-            if (isCartaoLoja) {
-                total -= total * 0.1;  
-            }
-        }
-
-        total += venda.calculaTaxa(total);
-        
-      /*   A lógica para aplicar descontos e calcular cashback foi movida para a nova classe, 
-        o que reduz a complexidade do método Venda::calcularTotal e melhora a coesão da classe Venda. */
-        
-        venda.cliente.atualizaSaldoCashback(venda.calculaCashback(total, isCartaoLoja));
-        venda.cliente.atualizaTotalComprasMes(total);
-
-        return total - (total * venda.cliente.getDesconto());
-    }
-}
 
 // Classe Venda modificada
 public class Venda {
@@ -94,22 +55,6 @@ public class Venda {
         return calculadora.calcularTotal();
     }
 
-    public double calculaTaxa(double total) {
-        double taxaICMS = 0.0;
-        double taxaMunicipal = 0.0;
-
-        if (cliente.getEndereco().getRegiao().equals("Distrito Federal")) {
-            taxaICMS = 0.18;
-        } else {
-            taxaICMS = 0.12;
-            taxaMunicipal = 0.04;
-        }
-        double totalICMS = total * taxaICMS;
-        double totalMunicipal = total * taxaMunicipal;
-
-        return (totalICMS + totalMunicipal);
-    }
-
     public double calculaFrete() {
         return this.cliente.getEndereco().getFrete() - this.cliente.getDescontoFrete() * this.cliente.getEndereco().getFrete();
     }
@@ -119,7 +64,7 @@ public class Venda {
     }
 
     public double calculaCashback(double total, boolean cartaoLoja) {
-        if (this.cliente.getTipo() != Cliente.TipoCliente.PRIME) {
+        if (this.cliente.getTipo() != TipoCliente.PRIME) {
             return 0.0;
         }
         if (cartaoLoja) {
@@ -127,4 +72,5 @@ public class Venda {
         }
         return 0.03 * total;
     }
+
 }

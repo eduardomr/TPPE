@@ -52,8 +52,11 @@ public class CalculaTaxaTest {
 
         Venda venda = new Venda(itens, this.cliente, Venda.metodoPagamento.dinheiro, new Date());
         double valor = venda.calcularTotalSemTaxa(Venda.metodoPagamento.dinheiro);
-        double taxa = venda.calculaTaxa(valor);
+
+        // Usando a nova classe CalculadoraTaxa
+        CalculadoraTaxa calculadoraTaxa = new CalculadoraTaxa(venda);
+        double taxa = calculadoraTaxa.calculaTaxa(valor);
+
         assertEquals(taxaEsperada, taxa, 0.1);
     }
-
 }
